@@ -1,6 +1,24 @@
 const userService = require("../services/user.services");
 
 // Create and Save a new User
+exports.login = (req, res, next) => {
+  var model = {
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  userService.loginUser(model, (error, results) => {
+    if (error) {
+      return next(error);
+    }
+    return res.status(200).send({
+      message: "Success",
+      data: results.user_id,
+    });
+  });
+};
+
+// Create and Save a new User
 exports.create = (req, res, next) => {
   var model = {
     name: req.body.name,

@@ -1,6 +1,23 @@
 const db = require("../config/db.config.js");
 const User = db.User;
 
+async function loginUser(params, callback) {
+    try {
+        const user = await User.findOne({
+            where: {
+                email: params.email,
+                password: params.password
+            }
+        });
+
+        console.log('New user Login');
+        callback(null, user);
+    } catch (error) {
+        console.error('Error creating User:', error);
+        callback(error);
+    }
+}
+
 async function createUser(params, callback) {
     try {
         const newUser = await User.create({
@@ -10,7 +27,7 @@ async function createUser(params, callback) {
             password: params.password
         });
 
-        console.log('New comment created:', newUser.toJSON());
+        console.log('New user created:', newUser.toJSON());
         callback(null, newUser);
     } catch (error) {
         console.error('Error creating User:', error);
@@ -75,6 +92,7 @@ async function deleteUser(params) {
 }
 
 module.exports = {
+    loginUser,
     createUser,
     getUsers,
     getUserById,

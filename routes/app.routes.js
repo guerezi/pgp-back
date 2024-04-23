@@ -57,6 +57,9 @@ router.delete("/notifications/:id", notificationController.delete);
 
 
 
+// Logins
+router.post("/login", userController.login);
+
 // Create a new user
 router.post("/users", userController.create);
 
