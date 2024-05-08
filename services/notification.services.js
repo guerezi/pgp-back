@@ -39,7 +39,7 @@ async function getNotificationById(params, callback) {
     try {
         const notification = await Notification.findByPk(notification_id).where({ user_id: user_id });
         if (!notification) throw new Error(`Not found notification with id ${notification_id}`);
-        callback(null, notification);
+        callback(null, [notification]);
     } catch (error) {
         console.error('Error getting notification by ID:', error);
         callback(error);

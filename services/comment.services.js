@@ -38,7 +38,7 @@ async function getCommentById(params, callback) {
     try {
         const comment = await Comment.findByPk(comment_id);
         if (!comment) throw new Error(`Not found comment with id ${comment_id}`);
-        callback(null, comment);
+        callback(null, [comment]);
     } catch (error) {
         console.error('Error getting comment by ID:', error);
         callback(error);
